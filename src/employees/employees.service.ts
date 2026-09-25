@@ -11,21 +11,7 @@ export class EmployeesService {
 
   getEmployees() {
     try {
-    } catch (error) {
-      this.logger.error(
-        'Failed to fetch employees',
-        error instanceof Error ? error.stack : String(error),
-      );
-
-      throw new InternalServerErrorException(
-        'Unable to fetch employees',
-      );
-    }
-  }
-
-  getEmployee(id: number) {
-    try {
-      const employees = [
+      return [
         {
           id: 1,
           name: 'Rahul',
@@ -45,6 +31,21 @@ export class EmployeesService {
           salary: 55000,
         },
       ];
+    } catch (error) {
+      this.logger.error(
+        'Failed to fetch employees',
+        error instanceof Error ? error.stack : String(error),
+      );
+
+      throw new InternalServerErrorException(
+        'Unable to fetch employees',
+      );
+    }
+  }
+
+  getEmployee(id: number) {
+    try {
+      const employees = this.getEmployees();
 
       const employee = employees.find((emp) => emp.id === id);
 
